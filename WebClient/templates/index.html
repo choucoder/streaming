@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>Streaming test</title>
+        <style type="text/css">
+            #events_list{
+                width: 20%;
+                height: 90%;
+                margin-left: 70%;
+                overflow-y: scroll;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+            <div class="streaming-container">
+                <img id="aeiou12345video.mp4" width=200, height=200, src="" alt="">
+                <img id="video_2.mp4" width=200, height=200, src="" alt="">
+                <img id="video_3.mp4" width=200, height=200, src="" alt="">
+                <img id="video_4.mp4" width=200, height=200, src="" alt="">
+            </div>
+            
+        </center>
+        <script src="static/js/jquery-3.3.1.js"></script>
+        <script src="static/js/notifications.js"></script>
+        <script type="text/javascript">
+
+            var url = "ws://192.168.1.22:9002";
+            var socket, socketName;
+
+            if(window.WebSocket === undefined) {
+                console.log("Sockets not supported");
+            }else{
+                console.log("Sockets is supported by browser");
+                window.addEventListener("load", createWebSocket(url, socket), false);
+            }
+
+            setInterval(function(e) {
+                if (socket == undefined || socket.readyState == 3) {
+                    createWebSocket(url, "Local");
+                    console.log("Trying connect to web socket server!");
+                }
+            }, 20000);
+        </script>
+    </body>
+</html>
